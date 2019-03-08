@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Form} from 'antd';
 
-import RegisterForm from '../components/RegisterForm'
+import RegisterForm from '../components/RegisterForm/RegisterForm'
 class Register extends React.Component {
     constructor(props){
         super(props);

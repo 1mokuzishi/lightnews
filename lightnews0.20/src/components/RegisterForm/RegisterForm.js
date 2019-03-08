@@ -1,6 +1,6 @@
 import React from 'react';
 import {Form, Input, Tooltip, Icon, Row, Col, Checkbox, Button,} from 'antd';
-
+import './index.css'
 class RegisterForm extends React.Component {
     constructor(props) {
         super(props);

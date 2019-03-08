@@ -1,15 +1,14 @@
 import React from 'react';
-
 import reqwest from 'reqwest';
-import util from '../lib/util'
-import Aside from './Aside'
-
+import util from '../../lib/util'
+import Aside from '../Aside/Aside'
+import './index.css'
 class Content extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             list:[],
-            load:true,
+            pages:0,
         };
     }
     componentDidMount() {
@@ -17,37 +16,25 @@ class Content extends React.Component {
         let channel = util.channelId2Name(this.props.channel);
         let url=`http://localhost:8000/api/channel/${channel}?count=20`;//&next_id=${next_id}
         this.getData(url);
-        window.addEventListener('scroll', this.handleScroll);
-        setInterval(this.handleScroll,2000);
-}
-    handleScroll=() =>{
-            var scrollTop = document.documentElement.scrollTop;
-            var scrollHeight = document.documentElement.scrollHeight;
-            if(scrollHeight<16000){
-                if(scrollTop >0.8*scrollHeight){
-                    let next_id = document.getElementById("next_id").getAttribute('next_id');
-                    let channel = util.channelId2Name(this.props.channel);
-                    let url=`http://localhost:8000/api/channel/${channel}?count=20&next_id=${next_id}`;//&next_id=${next_id}
-                    this.getData(url);
-                    document.documentElement.scrollTop-=500;
-                }
-            }else{
-                this.setState({
-                    load:false,
-                })
-            }
-
     }
+    handleMore = (e)=>{
+        let channel = util.channelId2Name(this.props.channel);
+        let nextId = e.target.getAttribute('next_id');
+        let url=`http://localhost:8000/api/channel/${channel}?count=20&next_id=${nextId}`;//
+        this.getData(url)
+    }
+
     getData =(url)=> {
         reqwest({
             url:url,
             method:'get',
             contentType: 'application/json',
             success: (res) => {
-                var tmp= [...this.state.list,...res.data]
+                let tmp= [...this.state.list,...res.data];
+                let pages=this.state.pages++;
                 this.setState({
                     list: tmp,
-                    loading:true
+                    pages:pages
                 },()=>{
                     var nextid=this.state.list[this.state.list.length-1]._id;
                     document.getElementById("next_id").setAttribute('next_id',nextid)
@@ -83,11 +70,12 @@ class Content extends React.Component {
                                 )
                             })
                         }
-                        <span id="next_id" style={{opacity:0}}></span>
                     </div>
                     <Aside></Aside>
                 </div>
-                {this.state.load?"":<div className="load_tip">数据加载完毕，请刷新页面获取更多资讯。</div>}
+                {this.state.pages<6?<div className="load_tip" id="next_id" onClick={this.handleMore}>点击加载更多数据。</div>
+                :<div className="load_tip">数据加载完毕。</div>}
+
             </div>
         )
     }

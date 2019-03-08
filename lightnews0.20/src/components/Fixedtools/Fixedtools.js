@@ -1,7 +1,7 @@
 import React from 'react';
-import fixedTool_top from '../assets/image/fixedtool_top.png';
-import fixedTool_refresh from '../assets/image/refresh.png';
-
+import fixedTool_top from '../../assets/image/fixedtool_top.png';
+import fixedTool_refresh from '../../assets/image/refresh.png';
+import './index.css'
 class Fixedtools extends React.Component {
     constructor(props) {
         super(props);

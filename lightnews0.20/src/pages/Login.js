@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form} from 'antd';
 
-import LoginForm from '../components/LoginForm'
+import LoginForm from '../components/LoginForm/LoginForm'
 
 class Login extends React.Component {
     constructor(props) {

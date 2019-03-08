@@ -1,0 +1,49 @@
+/*注册页面*/
+.register-root{
+    position: relative;
+    background: #e8e8e8;
+    padding: 20px 0;
+}
+.register_brand {
+    width: 50%;
+    height: 850px;
+    background-size: cover;
+    background:url(../../assets/image/brand_bg.jpg) no-repeat 50%;
+    color: #fff;
+    padding: 160px 0;
+    text-align: center;
+}
+.register_brand h2 {
+    font-weight: 400;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: inherit;
+}
+.register_brand p {
+    font-size: 14px;
+}
+.register_brand .line {
+    width: 36px;
+    height: 2px;
+    background: #fff;
+    margin: 420px auto 25px;
+}
+
+.register-root .register_box{
+    position: absolute;
+    top: 160px;
+    left: 50%;
+    width: 480px;
+    min-height: 530px;
+    border-radius: 4px;
+    background: #fff;
+    padding: 50px 80px;
+}
+
+.form_title {
+    font-weight: 400;
+    font-size: 24px;
+    color: #121212;
+    text-align: center;
+    margin-bottom: 40px;
+}

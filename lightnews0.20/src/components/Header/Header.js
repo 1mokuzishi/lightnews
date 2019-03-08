@@ -1,7 +1,7 @@
 import React from 'react';
-
 import { Button } from 'antd';
 import "antd/dist/antd.css";
+import './index.css'
 
 class Header extends React.Component {
     constructor(props) {

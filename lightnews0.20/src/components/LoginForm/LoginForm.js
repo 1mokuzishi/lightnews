@@ -1,5 +1,7 @@
 import React from 'react';
 import {Form, Input, Button, Checkbox,} from 'antd';
+import './index.css'
+
 
 class LoginForm extends React.Component {
     handleSubmit = (e) => {

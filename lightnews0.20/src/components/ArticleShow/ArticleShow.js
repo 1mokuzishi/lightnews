@@ -1,7 +1,8 @@
 import React from 'react';
-import util from '../lib/util';
-import Aside from '../components/Aside'
+import util from '../../lib/util';
+import Aside from '../Aside/Aside'
 import _ from 'lodash'
+import './index.css'
 
 class ArticleShow extends React.Component {
     constructor(props) {

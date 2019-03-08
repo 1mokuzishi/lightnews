@@ -1,11 +1,12 @@
 import React from 'react';
-import Header from '../components/Header'
-import Nav from '../components/Nav'
-import ArticleShow from '../components/ArticleShow'
-import Fixedtool from '../components/Fixedtools'
-import Footer from "../components/Footer";
+import Header from '../components/Header/Header'
+import Nav from '../components/Nav/Nav'
+import ArticleShow from '../components/ArticleShow/ArticleShow'
+import Fixedtool from '../components/Fixedtools/Fixedtools'
+import Footer from "../components/Footer/Footer";
 import reqwest from 'reqwest';
 import util from '../lib/util';
+
 
 
 
