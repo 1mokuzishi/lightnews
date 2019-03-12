@@ -13,3 +13,8 @@ exports.News = mongoose.model('News', {
   tags: { type:'string'},
   content: { type:'string'}
 })
+
+exports.HotSearchList = mongoose.model('HotSearchList', {
+    keyword: { type: 'string' },
+    searchCount:{type:'number'}
+})

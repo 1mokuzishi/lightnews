@@ -1,113 +1,89 @@
 import React from 'react';
-import {Form, Input, Tooltip, Icon, Row, Col, Checkbox, Button,} from 'antd';
 import './index.css'
+
 class RegisterForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            user:{
+                phone:"",
+                password:""
+            }
+        }
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.form.validateFieldsAndScroll((err, values) => {
-            if (!err) {
-                console.log('从注册表单接收的信息 ', values);
+
+    }
+    addError=(err)=>{
+       let oErr = document.getElementById("error");
+       let oDiv = document.getElementsByClassName("ys_form_error");
+       let newErr = document.createElement('li');
+       oDiv[0].classList.add('ys_form_error_show');
+       newErr.innerText=`${err}`;
+       oErr.appendChild(newErr);
+    }
+    handlePhone = (e)=>{
+        let phone = e.target.value;
+        let regExp=/^1[34578]\d{9}$/;
+        if(!phone){
+            if(!regExp.test(phone)){
+                this.addError("电话格式错误。")
+            }else{
+                this.setState({
+                    user:{phone:phone}
+                })
             }
-        });
-    }
-
-    handleConfirmBlur = (e) => {
-        const value = e.target.value;
-        this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-    }
-
-    compareToFirstPassword = (rule, value, callback) => {
-        const form = this.props.form;
-        if (value && value !== form.getFieldValue('password')) {
-            callback('两次输入密码不一致');
-        } else {
-            callback();
+        }else{
+            this.addError("电话不能为空。")
         }
-    }
 
-    validateToNextPassword = (rule, value, callback) => {
-        const form = this.props.form;
-        if (value && this.state.confirmDirty) {
-            form.validateFields(['confirm'], { force: true });
+    }
+    handlePassword=(e)=>{
+        let password = e.target.value;
+        this.setState({
+            user:{password:password}
+        })
+    }
+    handlesPassword=(e)=>{
+        let password=this.state.user.password;
+        let spassword = e.target.value;
+        if(password){
+            if(spassword !== password){
+                this.addError("两次密码不相同。")
+            }
+        }else{
+            this.addError("密码不能为空。")
         }
-        callback();
+
     }
     render() {
-        const { getFieldDecorator } = this.props.form;
-
-        const formItemLayout = {
-            wrapperCol: {
-                span: 24 ,
-            },
-        };
-        const tailFormItemLayout = {
-            wrapperCol: {
-                span: 24,
-                offset: 0,
-            },
-        };
-
         return (
-            <Form onSubmit={this.handleSubmit}>
-                <Form.Item
-                    {...formItemLayout}
-                >
-                    {getFieldDecorator('phone', {
-                        rules: [{ required: true, message: '请输入手机号码!' }],
-                    })(
-                        <Input style={{ width: '100%' }} placeholder="电话" />
-                    )}
-                </Form.Item>
-                <Form.Item
-                    {...formItemLayout}
-                >
-                    {getFieldDecorator('nickname', {
-                        rules: [{ required: true, message: '请输入昵称!', whitespace: true }],
-                    })(
-                        <Input placeholder="昵称" />
-                    )}
-                </Form.Item>
-                <Form.Item
-                    {...formItemLayout}
-                >
-                    {getFieldDecorator('password', {
-                        rules: [{
-                            required: true, message: '请输入密码!',
-                        }, {
-                            validator: this.validateToNextPassword,
-                        }],
-                    })(
-                        <Input type="password" placeholder="密码"/>
-                    )}
-                </Form.Item>
-                <Form.Item
-                    {...formItemLayout}
-                >
-                    {getFieldDecorator('confirm', {
-                        rules: [{
-                            required: true, message: '请验证你的密码!',
-                        }, {
-                            validator: this.compareToFirstPassword,
-                        }],
-                    })(
-                        <Input type="password" onBlur={this.handleConfirmBlur} placeholder="验证密码"/>
-                    )}
-                </Form.Item>
-                <Form.Item {...tailFormItemLayout}>
-                    {getFieldDecorator('agreement', {
-                        valuePropName: 'checked',
-                    })(
-                        <Checkbox>我已阅读并同意用户协议</Checkbox>
-                    )}
-                </Form.Item>
-                <Form.Item {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit" style={{width:'100%'}}>注册</Button>Or <a href="/login">登录</a>
-                </Form.Item>
-            </Form>
+            <form action="" method="post">
+                <div className="ys_input">
+                    <input  type="number " name="phone" placeholder="电话" onBlur={this.handlePhone}/>
+                </div>
+                <div className="ys_input">
+                    <input  type="password" name="password" placeholder="密码" onBlur={this.handlePassword}/>
+                </div>
+                <div className="ys_input">
+                    <input  type="password" name="spassword" placeholder="密码确认" onBlur={this.handlesPassword}/>
+                </div>
+                <div className="ys_input">
+                    <div className="ys_form_error" >
+                        <span className="iconfont">!</span>
+                        <ul id="error">
+                        </ul>
+                    </div>
+                </div>
+                <div className="ys_input" >
+                    <span>如果已有账号，请</span><a href="">登录</a>
+                </div>
+                <div className="ys_input">
+                    <div className="ys_button">注册</div>
+                </div>
+
+            </form>
         )
     }
 }

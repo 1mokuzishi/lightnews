@@ -38,5 +38,15 @@ module.exports = {
             .sort({ _id: 1 })
             .exec()
     },
+    getNewsByKey:function getNewsByKey(key) {
+        const query = {
+            //$or: [ {title:`{$regex":${key}}`}, { content:`{$regex":${key}}` }]
+            title:eval("/"+key+"/i")
+        }
+        return News
+            .find(query)
+            .sort({ _id: 1 })
+            .exec()
+    },
   
 }

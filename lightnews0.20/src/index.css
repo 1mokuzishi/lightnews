@@ -11,6 +11,11 @@ body {
 }
 *, *::before, *::after {
   box-sizing: border-box;
+    margin:0;
+    padding: 0;
+}
+input:-ms-input-placeholder,textarea:-ms-input-placeholder {
+    color: #ffffff;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -39,5 +44,121 @@ code {
   max-width: 1130px;
   margin: 0 auto;
 }
+/*登录注册页面*/
+.ys_root{
+    position: relative;
+    padding: 20px 0;
+}
 
+.ys_brand {
+    width: 50%;
+    height: 850px;
+    background-size: cover;
+    background:url(./assets/image/brand_bg.jpg) no-repeat 50%;
+    color: #fff;
+    padding: 160px 0;
+    text-align: center;
+}
+.ys_brand h2 {
+    font-weight: 400;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: inherit;
+}
+.ys_brand p {
+    font-size: 14px;
+}
+
+.ys_brand .line {
+    width: 36px;
+    height: 2px;
+    background: #fff;
+    margin: 420px auto 25px;
+}
+
+.ys_box{
+    width: 50%;
+    padding-top: 160px;
+}
+.ys_box h3 {
+    font-weight: 400;
+    font-size: 24px;
+    color: #121212;
+    text-align: center;
+    margin-bottom: 40px ;
+}
+.ys_input{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.ys_input a{
+    text-decoration: none;
+    color: #3b3b3b;
+}
+.ys_input a:hover{
+    color: #00abff;
+    transition: all .5s ease;
+}
+.ys_input input{
+    display: inline-block;
+    width: 320px;
+    height: 40px;
+    font-size: 14px;
+    padding-left: 10px;
+    border: 1px solid #dadada;
+    border-radius: 4px;
+    outline: none;
+    transition: all .5s ease;
+}
+.ys_input input:focus{
+    border: 1px solid #00abff;
+    transition: all .5s ease;
+}
+.ys_input ys_checkbox{
+    width: 16px;
+    height: 16px;
+    background-image: url("./assets/image/checkbox.svg");
+}
+.ys_input .ys_button{
+    position: relative;
+    left: 228px;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #dadada;
+    cursor: pointer;
+}
+.ys_input .ys_button:hover{
+    color: #00abff;
+    border: 1px solid #00abff;
+    transition: all .5s ease;
+}
+.ys_form_error{
+     margin-top: 8px;
+     color: #ca0000;
+     font-size: 12px;
+    opacity: 0;
+}
+.ys_form_error_show{
+    opacity: 1;
+}
+.ys_form_error span{
+     display: inline-block;
+     width: 16px;
+     height: 16px;
+     font-size: 16px;
+     background-color:#ca0000;
+     color: #fff;
+     border-radius: 8px;
+    margin-right:2px;
+ }
+.ys_form_error ul{
+    display: inline-block;
+    list-style: none;
+}
+.ys_form_error ul li{
+    display: inline-block;
+}
 

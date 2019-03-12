@@ -30,9 +30,6 @@ class Article extends React.Component {
                     this.setState({
                         data: res.data,
                     })
-
-
-
             },
         });
     }

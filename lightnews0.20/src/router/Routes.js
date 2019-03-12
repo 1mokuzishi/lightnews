@@ -23,7 +23,7 @@ let Search = Loadable({
     loading: Loading
 })
 let Login = Loadable({
-    loader: () => import('./../pages/Login'),
+    loader: () => import('../pages/Login'),
     loading: Loading
 })
 let Register = Loadable({

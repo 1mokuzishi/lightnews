@@ -1,12 +1,30 @@
 import React from 'react';
 import "./index.css"
+import reqwest from 'reqwest';
+
 class Aside extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             hotData: [{path:"",title:"想不到吧！13 个电影中想不到吧！13 个电影中的良心细节的良心细节",author:"央视网",createAt:"六小时前"}],
-            topSearchList:[{searchPath:"",keyword:"故宫首次晚间开放"}],
+            topSearchList:[],
         }
+    }
+    componentDidMount(){
+        this.getTopSearchList();
+    }
+    getTopSearchList=()=>{
+        reqwest({
+            url:"http://localhost:8000/api/hotsearchlist",
+            method:'get',
+            contentType: 'application/json',
+            success: (res) => {
+                this.setState({
+                    topSearchList: res.data,
+                })
+            },
+
+        });
     }
     handleInputOnFocus= (e) =>{
         var oSearchIcon = document.getElementById('searchIcon');
@@ -25,6 +43,11 @@ class Aside extends React.Component {
             searchInfo : e.target.value,
         })
     }
+    handleInputEnter=(e)=>{
+        if(e && e.keyCode==13){
+            this.handleSearch()
+        }
+    }
     handleSearch= ()=>{
         const {searchInfo} = this.state;
         console.log(searchInfo,'Search------searchInfo');
@@ -41,6 +64,7 @@ class Aside extends React.Component {
                            onFocus={this.handleInputOnFocus}
                            onBlur={this.handleInputOnBlur}
                            onChange={this.handleGetInputValue}
+                           onKeyDown={this.handleInputEnter}
                     />
                     <div className="search_icon" id="searchIcon"></div>
                     <div className="search_btn" onClick={this.handleSearch}>搜索</div>
@@ -71,8 +95,8 @@ class Aside extends React.Component {
                             this.state.topSearchList.map((item,index)=>{
                                 return(
                                     <span key={index} style={{float:"left"}}>
-                                                <a href={item.searchPath} title={item.keyword} target="_blank">{item.keyword}</a>
-                                            </span>
+                                        <a href={`/search?keyword=${item.keyword}`} title={item.keyword} target="_blank">{item.keyword}</a>
+                                    </span>
                                 )
                             })
                         }
