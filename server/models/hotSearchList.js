@@ -1,5 +1,4 @@
 const HotSearchList = require('../mongo').HotSearchList
-const mongoose = require('mongoose')
 module.exports = {
     upsert: function upsert(key) {
         return HotSearchList

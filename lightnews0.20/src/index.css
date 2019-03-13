@@ -139,9 +139,9 @@ code {
      margin-top: 8px;
      color: #ca0000;
      font-size: 12px;
-    opacity: 0;
+     opacity: 0;
 }
-.ys_form_error_show{
+.show{
     opacity: 1;
 }
 .ys_form_error span{

@@ -1,5 +1,4 @@
 const News = require('../mongo').News
-const mongoose = require('mongoose')
 module.exports = {
   //插入新闻
     upsert: function upsert(news) {
@@ -15,7 +14,7 @@ module.exports = {
     },
     getNewsById: function getNewsById (newsId) {
         return News
-            .findOne({ _id: newsId })
+            .find({ _id: newsId })
             .exec()
     }, 
     getNewsByChannel: function getNewsByChannel (channel) {

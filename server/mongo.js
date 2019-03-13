@@ -18,3 +18,10 @@ exports.HotSearchList = mongoose.model('HotSearchList', {
     keyword: { type: 'string' },
     searchCount:{type:'number'}
 })
+exports.User = mongoose.model('User', {
+    nickname: { type: 'string' },
+    phone:{type: 'string',required:true ,unique: true},
+    password:{type: 'string'},
+    keyword:[],
+    history:[],
+})

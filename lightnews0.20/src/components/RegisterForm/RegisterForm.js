@@ -1,89 +1,139 @@
 import React from 'react';
-import './index.css'
+import reqwest from 'reqwest';
+import util from '../../lib/util'
 
 class RegisterForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user:{
-                phone:"",
-                password:""
-            }
+            phone:"",
+            password:"",
+            err:[],
         }
     }
-    handleSubmit = (e) => {
-        e.preventDefault();
+    handleSubmit = () => {
+        let user = {phone:this.state.phone,password:util.encode(this.state.password)}
+        reqwest({
+            url:"http://localhost:8000/api/user/register",
+            method:'post',
+            data: user,
+            success: (res) => {
+                if(res === "电话已被占用。"){
+                    this.addError(res);
+                }else{
+                    //跳转回主页面
+                    this.delError("电话已被占用。");
+                    console.log('success')
 
+
+
+
+
+
+
+
+
+
+
+                }
+            },
+        });
     }
     addError=(err)=>{
-       let oErr = document.getElementById("error");
-       let oDiv = document.getElementsByClassName("ys_form_error");
-       let newErr = document.createElement('li');
-       oDiv[0].classList.add('ys_form_error_show');
-       newErr.innerText=`${err}`;
-       oErr.appendChild(newErr);
+        let tmp =new Set([...this.state.err,err])
+        this.setState({
+            err:Array.from(tmp)
+        },()=>{
+            if(this.state.err.length === 1){
+                let oDiv = document.getElementsByClassName("ys_form_error");
+                oDiv[0].classList.add('show');
+            }
+        })
+    }
+    delError=(err)=>{
+        let tmp  = this.state.err;
+        let index = tmp.indexOf(err) ;
+        if(index>-1){
+            tmp.splice(index,1);
+            this.setState({
+                err:tmp,
+            },()=>{
+                if(this.state.err.length === 0){
+                    let oDiv = document.getElementsByClassName("ys_form_error");
+                    oDiv[0].classList.remove('show');
+                }
+            })
+        }
+
     }
     handlePhone = (e)=>{
         let phone = e.target.value;
         let regExp=/^1[34578]\d{9}$/;
-        if(!phone){
-            if(!regExp.test(phone)){
-                this.addError("电话格式错误。")
-            }else{
+        if(phone){
+            this.delError("电话不能为空。")
+            if(regExp.test(phone)){
+                this.delError("电话格式错误。")
                 this.setState({
-                    user:{phone:phone}
+                    phone:phone
                 })
+            }else{
+                this.addError("电话格式错误。")
             }
         }else{
             this.addError("电话不能为空。")
         }
-
     }
     handlePassword=(e)=>{
         let password = e.target.value;
         this.setState({
-            user:{password:password}
+            password:password
         })
     }
     handlesPassword=(e)=>{
-        let password=this.state.user.password;
+        let password=this.state.password;
         let spassword = e.target.value;
         if(password){
+            this.delError("密码不能为空。")
             if(spassword !== password){
                 this.addError("两次密码不相同。")
+            }else{
+                this.delError("两次密码不相同。")
             }
         }else{
             this.addError("密码不能为空。")
         }
-
     }
     render() {
+        let {err} = this.state;
         return (
-            <form action="" method="post">
+            <div className="ys_form register_root" >
                 <div className="ys_input">
                     <input  type="number " name="phone" placeholder="电话" onBlur={this.handlePhone}/>
                 </div>
                 <div className="ys_input">
-                    <input  type="password" name="password" placeholder="密码" onBlur={this.handlePassword}/>
+                    <input  type="password" name="password" placeholder="密码" onChange={this.handlePassword}/>
                 </div>
                 <div className="ys_input">
-                    <input  type="password" name="spassword" placeholder="密码确认" onBlur={this.handlesPassword}/>
+                    <input  type="password"  placeholder="密码确认" onChange={this.handlesPassword}/>
                 </div>
                 <div className="ys_input">
                     <div className="ys_form_error" >
                         <span className="iconfont">!</span>
                         <ul id="error">
+                            {err.map((item,index)=>{
+                                return <li key={index}>{item}</li>
+                            })}
                         </ul>
                     </div>
                 </div>
                 <div className="ys_input" >
-                    <span>如果已有账号，请</span><a href="">登录</a>
+                    <span>如果已有账号，请</span><a href="/login">登录</a>
                 </div>
                 <div className="ys_input">
-                    <div className="ys_button">注册</div>
+                    <div className="ys_button" onClick={this.handleSubmit}>注册</div>
                 </div>
 
-            </form>
+            </div>
         )
     }
 }

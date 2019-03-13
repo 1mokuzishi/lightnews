@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const News = require('../models/news')
 const HotSearchList = require('../models/hotSearchList')
+const User = require('../models/user')
 
 router.get('/news', (req, res) => {
    res.send('hello')
@@ -75,5 +76,31 @@ router.get('/hotsearchlist', (req, res) => {
         .catch(err=>{
             res.send(err)
         })
+})
+router.post('/user/register', (req, res) => {
+    let user = req.body;
+    user.nickname = `user${user.phone.substr(0,8)}`;
+    User.createUser(user)
+        .then(result=>{
+            res.send(result);
+        }).catch(()=>{
+            res.send("电话已被占用。")
+    })
+
+})
+
+
+router.post('/user/login', (req, res) => {
+    let user = req.body;
+    User.getUserByPhone(user.phone)
+        .then(result=>{
+            if(result[0].password === user.password){
+                res.send(result[0]);
+            }else{
+                res.send("密码错误。")
+            }
+        }).catch((err)=>{
+            res.send("用户不存在。")
+         })
 })
 module.exports = router
