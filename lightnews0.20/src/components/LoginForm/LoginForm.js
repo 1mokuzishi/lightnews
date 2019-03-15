@@ -14,10 +14,10 @@ class LoginForm extends React.Component {
     handleSubmit = () => {
         let user = {phone:this.state.phone,password:util.encode(this.state.password)}
         reqwest({
-            url:"http://localhost:8000/api/user/login",
-            method:'post',
-            data: user,
-            success: (res) => {
+                url:"http://localhost:8000/api/user/login",
+                method:'post',
+                data: user,
+                success: (res) => {
                 if(res === "用户不存在。"){
                     this.addError(res);
                     this.delError("密码错误。");
@@ -28,18 +28,7 @@ class LoginForm extends React.Component {
                     //跳转回主页面
                     this.delError("用户不存在。");
                     this.delError("密码错误。");
-                    console.log('success')
-
-
-
-
-
-
-
-
-
-
-
+                    window.location.href="/home"
                 }
             },
         });

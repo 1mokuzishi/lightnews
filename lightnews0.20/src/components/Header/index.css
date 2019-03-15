@@ -15,4 +15,29 @@
 }
 .header .sign_container{
     width: 200px;
+    display: flex;
+    flex-direction: row;
+    padding: 20px 0;
+}
+.header .ys_button{
+    width: 80px;
+    height: 40px;
+    margin-right:14px ;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #dadada;
+    cursor: pointer;
+    line-height: 40px;
+    text-align: center;
+}
+.header .ys_button:hover{
+    color: #00abff;
+    border: 1px solid #00abff;
+    transition: all .5s ease;
+}
+.header .ys_button a{
+    outline: none;
+    text-decoration: none;
+    color: #3b3b3b;
+
 }

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/lightnews',{useNewUrlParser: true })
+mongoose.connect('mongodb://localhost:27017/lightnews',{useNewUrlParser: true,useCreateIndex: true})
 mongoose.Promise = global.Promise
 
 exports.News = mongoose.model('News', {
