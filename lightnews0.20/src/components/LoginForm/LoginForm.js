@@ -14,7 +14,7 @@ class LoginForm extends React.Component {
     handleSubmit = () => {
         let user = {phone:this.state.phone,password:util.encode(this.state.password)}
         reqwest({
-                url:"http://localhost:8000/api/user/login",
+                url:"http://localhost:8000/api/authenticate",
                 method:'post',
                 data: user,
                 success: (res) => {
@@ -28,6 +28,7 @@ class LoginForm extends React.Component {
                     //跳转回主页面
                     this.delError("用户不存在。");
                     this.delError("密码错误。");
+                    util.setItem('jwt-token',res.token)
                     window.location.href="/home"
                 }
             },

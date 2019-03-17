@@ -1,5 +1,6 @@
 import React from 'react';
 import util from '../../lib/util'
+import reqwest from 'reqwest'
 import './index.css'
 
 class Header extends React.Component {
@@ -10,11 +11,15 @@ class Header extends React.Component {
         }
     }
     componentDidMount(){
-        /*let token=util.getItem("ggsimida");
-        return {
-            isLogin:!!token,
-            token:token
-        }*/
+        let token = util.getItem('jwt-token');
+        reqwest({
+            url:"http://localhost:8000/api/user",
+            method:"get",
+            headers: {'Authorization': token},
+            success:(result) =>{
+                console.log(result.message)
+            }
+        })
 
     }
 

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const winston = require('winston')
 const expressWinston = require('express-winston')
 const cors = require('cors')
+//var jwt = require('express-jwt');
 
 const apiRouter = require('./router/api')
 
@@ -16,6 +17,7 @@ app.use(cors({
 
 
 
+app.set('superSecret',"jwtSecret");
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -28,6 +30,7 @@ app.use(expressWinston.logger({
   ]
 }))
 // 路由
+
 app.use('/api',apiRouter)
 // 错误请求的日志
 app.use(expressWinston.errorLogger({
