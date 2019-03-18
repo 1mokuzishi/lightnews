@@ -22,6 +22,10 @@ exports.User = mongoose.model('User', {
     nickname: { type: 'string' },
     phone:{type: 'string',required:true ,unique: true},
     password:{type: 'string'},
+    birth:{type:'string',default:""},
+    avatar:{type: 'string',default:'https://profile.csdnimg.cn/2/B/3/1_qq_29002631'},
+    region:{type:'string',default:"四川省_成都市"},
+    industry:{type: 'string',default:""},
     keyword:[],
     history:[],
 })

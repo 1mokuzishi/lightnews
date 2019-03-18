@@ -30,7 +30,10 @@ let Register = Loadable({
     loader: () => import('./../pages/Register'),
     loading: Loading
 })
-
+let User = Loadable({
+    loader: () => import('./../pages/User'),
+    loading: Loading
+})
 
 
 export default  class RootRouter extends React.Component{
@@ -43,6 +46,7 @@ export default  class RootRouter extends React.Component{
                     <Route path="/search" component={Search} />
                     <Route path="/channel/:channelId" component={Channel} />
                     <Route path="/article/:articleId" component={Article} />
+                    <Route path="/user" component={User} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                     {/*路由不正确时，默认跳回home页面*/}

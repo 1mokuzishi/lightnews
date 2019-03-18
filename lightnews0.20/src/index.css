@@ -29,8 +29,9 @@ code {
     display: flex;             /* 新语法, Spec - Opera 12.1, Firefox 20+ */
 }
 .flex_row_between{
-  flex-direction:row;
-  justify-content: space-between;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: center;
 }
 .flex-9{
   -webkit-box-flex: 9;

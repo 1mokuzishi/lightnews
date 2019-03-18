@@ -1,11 +1,12 @@
 /*Header-----------------------------------------------------*/
 .header {
-    padding: 10px 40px 10px 40px;
+    padding: 10px 150px 10px 40px;
     height: 80px;
     line-height: 76px;
     text-align: left;
     background-color: #fcfcfc;
     margin-bottom: 24px;
+    box-shadow: 0 2px 6px 0 rgba(12,40,46,0.20);
 }
 .header .logo{
     font-size: 28px;
@@ -40,4 +41,70 @@
     text-decoration: none;
     color: #3b3b3b;
 
+}
+.header .user_container{
+    height: 60px;
+    width: 180px;
+    padding: 0 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+.header .user_container:hover{
+    background-color: #efeff0;
+}
+.header .user_container .ys_avatar{
+    width:60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header .user_container .ys_avatar img{
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+}
+.header .user_container .ys_avatar img:hover{
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    transition: .5s ease;
+}
+.header .user_container .user_name{
+    width: 94px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.header .menus_warp{
+    width: 150px;
+    position: relative;
+    left:780px;
+    top:-10px;
+}
+.header .menus_warp .menus{
+    position:relative;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 5px 10px 0 rgba(12,40,46,0.20);
+    z-index: 999;
+    background-color: #fff;
+}
+.header .menus_warp .menus .menus_item{
+    list-style: none;
+    text-align: center;
+    border-radius: 6px;
+    border-bottom: 1px solid #efeff0;
+    height: 40px;
+    line-height: 40px;
+    display: list-item;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+.header .menus_warp .menus .menus_item:hover {
+    background-color: #efeff0;
+    transition: .5s ease;
 }

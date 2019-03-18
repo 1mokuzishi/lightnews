@@ -23,17 +23,8 @@ class RegisterForm extends React.Component {
                 }else{
                     //跳转回主页面
                     this.delError("电话已被占用。");
-                    console.log('success')
-
-
-
-
-
-
-
-
-
-
+                    util.setItem('jwt-token',res.token)
+                    window.location.href="/home";
 
                 }
             },

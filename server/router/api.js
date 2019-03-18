@@ -8,13 +8,13 @@ const HotSearchList = require('../models/hotSearchList')
 const User = require('../models/user')
 
 router.use(function(req,res,next) {
-    if (req.url === '/user') {
+    if (req.url === '/user'||req.url === '/register') {
         //token可能存在post请求和get请求
         let token = req.body.token || req.query.token || req.headers.authorization;
         jwt.verify(token, 'jwtSecret',  (err, decoded)=> {
             if (err) {
                 res.json({
-                    message: 'token过期，请重新登录',
+                    message: 'token expired',
                     resultCode: '403'
                 })
             } else {
@@ -95,10 +95,17 @@ router.post('/user/register', (req, res) => {
         user.nickname = `user${user.phone.substr(0,8)}`;
         User.createUser(user)
             .then(result=>{
-                res.send(result);
-            }).catch(()=>{
-            res.send("电话已被占用。")
-        })
+                let token = jwt.sign(result.toJSON(),'jwtSecret', {
+                    expiresIn : 60*60// 授权时效24小时
+                });
+                res.json({
+                    success: true,
+                    token: token
+                });
+            }).catch((err)=>{
+                if(err.errmsg.indexOf("duplicate" )>-1)
+                    res.send("电话已被占用。");
+            })
 })
 
 router.post('/authenticate', (req, res) => {
