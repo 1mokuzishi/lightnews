@@ -13,6 +13,7 @@
     font-weight: bold;
     font-family: "Microsoft YaHei UI ";
     color: #000;
+    cursor: pointer;
 }
 .header .sign_container{
     width: 200px;

@@ -5,8 +5,14 @@ module.exports = {
         return user.save().then()
     },
     getUserByPhone:function getUserByPhone(phone) {
-        return User
-            .find({phone:phone}).exec()
+        return User.find({phone:phone}).exec()
+    },
+    updateAvaById:function updateAvaById(id,img) {
+        return User.updateOne({_id:id},{$set:{avatar:img}}).exec()
+    },
+    findUserById:function findUserById(id) {
+        return User.find({_id:id}).exec()
     }
+
 
 }

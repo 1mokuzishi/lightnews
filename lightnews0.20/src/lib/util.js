@@ -25,7 +25,7 @@ const util={
         let temp=localStorage.getItem(key);
         let res=null;
         try {
-            if (res = JSON.parse(temp)) return res;
+            if (res === JSON.parse(temp)) return res;
         }
         catch(e){
             return temp;

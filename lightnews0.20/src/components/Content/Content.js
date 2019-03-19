@@ -31,7 +31,8 @@ class Content extends React.Component {
             contentType: 'application/json',
             success: (res) => {
                 let tmp= [...this.state.list,...res.data];
-                let pages=this.state.pages++;
+                let pages=this.state.pages;
+                pages++;
                 this.setState({
                     list: tmp,
                     pages:pages

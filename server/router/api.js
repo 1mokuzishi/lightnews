@@ -96,7 +96,7 @@ router.post('/user/register', (req, res) => {
         User.createUser(user)
             .then(result=>{
                 let token = jwt.sign(result.toJSON(),'jwtSecret', {
-                    expiresIn : 60*60// 授权时效24小时
+                    expiresIn : 60*60*24// 授权时效24小时
                 });
                 res.json({
                     success: true,
@@ -114,7 +114,7 @@ router.post('/authenticate', (req, res) => {
         .then(result=>{
             if(result[0].password === user.password){
                 let token = jwt.sign(result[0].toJSON(),'jwtSecret', {
-                    expiresIn : 60*60// 授权时效24小时
+                    expiresIn : 60*60*24// 授权时效24小时
                 });
                 res.json({
                     success: true,
@@ -136,6 +136,34 @@ router.post('/authenticate', (req, res) => {
 
 router.get('/user',(req,res)=>{
     res.json({ message: req.decoded});
+})
+router.post('/upload',(req,res)=>{
+   let img=req.body.data;
+   var user=req.body.user;
+   if(img!==undefined){
+       User.updateAvaById(user._id,img)
+           .then(()=>{
+               User.findUserById(user._id)
+                   .then((result)=>{
+                       let token = jwt.sign(result[0].toJSON(),'jwtSecret', {
+                           expiresIn : 60*60*24// 授权时效24小时
+                       });
+                       res.json({
+                           success: true,
+                           token: token
+                       });
+                   })
+                   .catch(err=>{
+                       console.log(err)
+                   })
+           })
+           .catch(err=>{
+           console.log(err)
+       })
+
+   }else{
+       res.send("1111")
+   }
 })
 
 module.exports = router

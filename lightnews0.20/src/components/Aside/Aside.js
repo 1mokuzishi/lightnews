@@ -44,7 +44,7 @@ class Aside extends React.Component {
         })
     }
     handleInputEnter=(e)=>{
-        if(e && e.keyCode==13){
+        if(e && e.keyCode === 13){
             this.handleSearch()
         }
     }

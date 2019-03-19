@@ -68,7 +68,7 @@ class Header extends React.Component {
         return (
             <div className="header main">
                      <div className="flex_row_between flex-block">
-                        <div className="logo"><span>LightNews</span></div>
+                        <div className="logo" onClick={this.handleExit}><span>LightNews</span></div>
                          {
                              (user === undefined)?
                                  <div className="sign_container">
@@ -80,7 +80,7 @@ class Header extends React.Component {
                                           onMouseOver={this.handleUserOver}
                                           onMouseOut={this.handleUserOut}
                                      >
-                                         <img src="https://avatar.csdn.net/1/F/D/3_qq_26625037.jpg"/>
+                                         <img src={user.avatar}/>
                                      </div>
                                      <div className="user_name">{user.nickname}</div>
                                  </div>
