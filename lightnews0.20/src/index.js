@@ -4,9 +4,10 @@ import {BrowserRouter} from 'react-router-dom';
 import './index.css';
 import RootRouter from './router/Routes';
 import * as serviceWorker from './serviceWorker';
+
 const mountNode = document.getElementById('root');
 ReactDOM.render(
-    <BrowserRouter>
+    <BrowserRouter >
         <RootRouter />
     </BrowserRouter>,
     mountNode

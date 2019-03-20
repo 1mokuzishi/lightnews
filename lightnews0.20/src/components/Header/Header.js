@@ -2,6 +2,7 @@ import React from 'react';
 import util from '../../lib/util'
 import reqwest from 'reqwest'
 import './index.css'
+import config from '../../config'
 
 class Header extends React.Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class Header extends React.Component {
     componentDidMount(){
         let token = util.getItem('jwt-token');
         reqwest({
-            url:"http://localhost:8000/api/user",
+            url:`${config.url}/api/user`,
             method:"get",
             headers: {'Authorization': token},
             success:(result) =>{

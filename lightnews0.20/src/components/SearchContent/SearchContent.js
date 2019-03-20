@@ -1,6 +1,7 @@
 import React from 'react';
 import Aside from '../Aside/Aside'
 import './index.css'
+import config from '../../config'
 class SearchContent extends React.Component {
     constructor(props) {
         super(props);

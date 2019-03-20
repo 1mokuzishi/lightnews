@@ -5,7 +5,7 @@ import Header from '../components/Header/Header'
 import SearchContent from '../components/SearchContent/SearchContent'
 import Fixedtool from '../components/Fixedtools/Fixedtools'
 import Footer from '../components/Footer/Footer'
-
+import config from '../config'
 class Search extends React.Component {
     constructor(props) {
         super(props);
@@ -20,7 +20,7 @@ class Search extends React.Component {
     }
     getSearchData = (keyword)=>{
         reqwest({
-            url:`http://localhost:8000/api/search?keyword=${keyword}`,
+            url:`${config.url}/api/search?keyword=${keyword}`,
             method:'get',
             contentType: 'application/json',
             success: (res) => {

@@ -39,7 +39,6 @@ let User = Loadable({
 export default  class RootRouter extends React.Component{
     render(){
         return(
-            <div>
                 <Switch>
                     <Route path="/" exact component={Home} />
                     <Route path="/home" component={Home} />
@@ -52,7 +51,6 @@ export default  class RootRouter extends React.Component{
                     {/*路由不正确时，默认跳回home页面*/}
                     <Route render={() => <Redirect to="/" />} />
                 </Switch>
-            </div >
         )
     }
 }

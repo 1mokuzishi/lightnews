@@ -5,7 +5,7 @@ import Footer from '../components/Footer/Footer'
 import Dialog from "../components/Dialog/Dialog";
 import util from '../lib/util'
 import reqwest from 'reqwest'
-
+import config from '../config'
 class User extends React.Component {
     constructor(props) {
         super(props);
@@ -21,7 +21,7 @@ class User extends React.Component {
         oInfo.addEventListener("click",this.handleInfoMod)
         let token = util.getItem('jwt-token');
         reqwest({
-            url: "http://localhost:8000/api/user",
+            url: `${config.url}/api/user`,
             method: "get",
             headers: {'Authorization': token},
             success: (result) => {

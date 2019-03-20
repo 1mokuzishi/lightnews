@@ -1,7 +1,7 @@
 import React from 'react';
 import reqwest from 'reqwest';
 import util from "../../lib/util";
-
+import config from '../../config'
 class LoginForm extends React.Component {
     constructor(props) {
         super(props);
@@ -14,7 +14,7 @@ class LoginForm extends React.Component {
     handleSubmit = () => {
         let user = {phone:this.state.phone,password:util.encode(this.state.password)}
         reqwest({
-                url:"http://localhost:8000/api/authenticate",
+                url:`${config.url}/api/authenticate`,
                 method:'post',
                 data: user,
                 success: (res) => {

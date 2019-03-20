@@ -9,8 +9,10 @@ class Footer extends React.Component {
     render() {
         return (
             <div className="footer" id="footer">
-                <br/> Copyright © 2019 WWW.yushuai.work All Rights Reserved
-                <br/>
+                <div>
+                    <p>Copyright © 2019 yushuai.work 仅供学习与交流</p>
+                    <p><a href="http://www.miitbeian.gov.cn/">蜀ICP备19007177号-1</a></p>
+                </div>
             </div>
         )
     }

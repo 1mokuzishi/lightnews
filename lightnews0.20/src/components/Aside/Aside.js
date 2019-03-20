@@ -1,7 +1,7 @@
 import React from 'react';
 import "./index.css"
 import reqwest from 'reqwest';
-
+import config from '../../config'
 class Aside extends React.Component {
     constructor(props) {
         super(props);
@@ -15,7 +15,7 @@ class Aside extends React.Component {
     }
     getTopSearchList=()=>{
         reqwest({
-            url:"http://localhost:8000/api/hotsearchlist",
+            url:`${config.url}/api/hotsearchlist`,
             method:'get',
             contentType: 'application/json',
             success: (res) => {

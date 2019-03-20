@@ -3,7 +3,7 @@ import { Upload, Icon ,message} from 'antd';
 import './index.css'
 import reqwest from 'reqwest'
 import util from '../../lib/util'
-
+import config from '../../config'
 
 function getBase64(img, callback) {
     const reader = new FileReader();
@@ -60,7 +60,7 @@ class Dialog extends React.Component {
     handleUpload=()=>{
         let token = util.getItem('jwt-token');
         reqwest({
-            url: "http://localhost:8000/api/upload",
+            url: `${config.url}/api/upload`,
             method: "post",
             data:{data:this.state.imageUrl,user:this.state.user},
             headers: {'Authorization': token},

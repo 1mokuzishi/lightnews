@@ -6,7 +6,7 @@ import Fixedtool from '../components/Fixedtools/Fixedtools'
 import Footer from "../components/Footer/Footer";
 import reqwest from 'reqwest';
 import util from '../lib/util';
-
+import config from '../config'
 
 
 
@@ -23,7 +23,7 @@ class Article extends React.Component {
     }
     getData = (articleId)=>{
         reqwest({
-            url:`http://localhost:8000/api/news/${articleId}`,
+            url:`${config.url}/api/news/${articleId}`,
             method:'get',
             contentType: 'application/json',
             success: (res) => {

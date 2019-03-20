@@ -2,6 +2,7 @@ import React from 'react';
 import reqwest from 'reqwest';
 import util from '../../lib/util'
 import Aside from '../Aside/Aside'
+import config from '../../config'
 import './index.css'
 class Content extends React.Component {
     constructor(props) {
@@ -14,13 +15,13 @@ class Content extends React.Component {
     componentDidMount() {
         console.log(this.props.channel,"content组件的channelId");
         let channel = util.channelId2Name(this.props.channel);
-        let url=`http://localhost:8000/api/channel/${channel}?count=20`;//&next_id=${next_id}
+        let url=`${config.url}/api/channel/${channel}?count=20`;
         this.getData(url);
     }
     handleMore = (e)=>{
         let channel = util.channelId2Name(this.props.channel);
         let nextId = e.target.getAttribute('next_id');
-        let url=`http://localhost:8000/api/channel/${channel}?count=20&next_id=${nextId}`;//
+        let url=`${config.url}/api/channel/${channel}?count=20&next_id=${nextId}`;//
         this.getData(url)
     }
 
@@ -37,6 +38,7 @@ class Content extends React.Component {
                     list: tmp,
                     pages:pages
                 },()=>{
+                    if(this.state.list.lenth>1)
                     var nextid=this.state.list[this.state.list.length-1]._id;
                     document.getElementById("next_id").setAttribute('next_id',nextid)
                 })
@@ -51,6 +53,7 @@ class Content extends React.Component {
                 <div className="main flex-block">
                     <div className="article_container flex-9">
                         {
+                            list.length>1?
                             list.map((item,index)=>{
                                 return(
                                 <div className="figure flex-block " key={index}>
@@ -69,7 +72,7 @@ class Content extends React.Component {
 
                                 </div>
                                 )
-                            })
+                            }):<div>暂时没有数据</div>
                         }
                     </div>
                     <Aside></Aside>

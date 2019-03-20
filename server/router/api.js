@@ -8,9 +8,9 @@ const HotSearchList = require('../models/hotSearchList')
 const User = require('../models/user')
 
 router.use(function(req,res,next) {
-    if (req.url === '/user'||req.url === '/register') {
+    if (req.url === '/user') {
         //token可能存在post请求和get请求
-        let token = req.body.token || req.query.token || req.headers.authorization;
+        let token = req.headers.authorization;
         jwt.verify(token, 'jwtSecret',  (err, decoded)=> {
             if (err) {
                 res.json({
@@ -90,7 +90,7 @@ router.get('/hotsearchlist', (req, res) => {
             res.send(err)
         })
 })
-router.post('/user/register', (req, res) => {
+router.post('/register', (req, res) => {
         let user = req.body;
         user.nickname = `user${user.phone.substr(0,8)}`;
         User.createUser(user)
