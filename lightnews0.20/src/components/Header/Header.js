@@ -24,7 +24,7 @@ class Header extends React.Component {
                 }else{
                     this.setState({
                         auth:true,
-                        user:result.message,
+                        user:result.user,
                     })
                 }
             }
@@ -61,6 +61,9 @@ class Header extends React.Component {
         util.removeItem('jwt-token');
         window.location.href="/home";
     }
+    handle2Home=()=>{
+        window.location.href="/home";
+    }
     handle2User=()=>{
         window.location.href=`/user`;
     }
@@ -69,9 +72,9 @@ class Header extends React.Component {
         return (
             <div className="header main">
                      <div className="flex_row_between flex-block">
-                        <div className="logo" onClick={this.handleExit}><span>LightNews</span></div>
+                        <div className="logo" onClick={this.handle2Home}><span>LightNews</span></div>
                          {
-                             (user === undefined)?
+                             (this.state.auth === false)?
                                  <div className="sign_container">
                                      <div className="ys_button"><a href="/login">登录</a></div>
                                      <div className="ys_button"><a href="/register">注册</a></div>

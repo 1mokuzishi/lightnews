@@ -4,7 +4,7 @@ import './index.css'
 import reqwest from 'reqwest'
 import util from '../../lib/util'
 import config from '../../config'
-
+import ModInfo from "../ModInfo/ModInfo";
 function getBase64(img, callback) {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
@@ -99,7 +99,7 @@ class Dialog extends React.Component {
                     </div>
                     {
                         (this.state.title =="修改资料")?
-                            <div></div>:
+                            <ModInfo/>:
                             <div className="avatar_mod_container">
                                 <div className="avatar">
                                     <img src={imageUrl?imageUrl:this.state.user.avatar}/>

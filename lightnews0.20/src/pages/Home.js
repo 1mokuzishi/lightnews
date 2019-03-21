@@ -16,7 +16,6 @@ class Home extends React.Component {
 
     render() {
         const channelId = this.state.channelId;
-        console.log(channelId,"home页面的channelId")
         return (
             <div className="home">
                 <Header></Header>

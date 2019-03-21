@@ -137,6 +137,22 @@ code {
     border: 1px solid #00abff;
     transition: all .5s ease;
 }
+.ys_input .ys_buttons{
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #dadada;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.ys_input .ys_buttons:hover{
+    color: #00abff;
+    border: 1px solid #00abff;
+    transition: all .5s ease;
+}
 .ys_form_error{
      margin-top: 8px;
      color: #ca0000;
@@ -163,4 +179,3 @@ code {
 .ys_form_error ul li{
     display: inline-block;
 }
-

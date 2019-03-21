@@ -27,7 +27,7 @@ class User extends React.Component {
             success: (result) => {
                 if (result.message !== "token expired") {
                     this.setState({
-                        user: result.message,
+                        user: result.user,
                     })
                 }else{
                     window.location.href='/home'

@@ -8,7 +8,7 @@ const HotSearchList = require('../models/hotSearchList')
 const User = require('../models/user')
 
 router.use(function(req,res,next) {
-    if (req.url === '/user') {
+    if (req.url === '/user'||req.url === '/modInfo') {
         //token可能存在post请求和get请求
         let token = req.headers.authorization;
         jwt.verify(token, 'jwtSecret',  (err, decoded)=> {
@@ -95,7 +95,8 @@ router.post('/register', (req, res) => {
         user.nickname = `user${user.phone.substr(0,8)}`;
         User.createUser(user)
             .then(result=>{
-                let token = jwt.sign(result.toJSON(),'jwtSecret', {
+                let tmp = {_id:result._id}
+                let token = jwt.sign(tmp,'jwtSecret', {
                     expiresIn : 60*60*24// 授权时效24小时
                 });
                 res.json({
@@ -113,7 +114,8 @@ router.post('/authenticate', (req, res) => {
     User.getUserByPhone(user.phone)
         .then(result=>{
             if(result[0].password === user.password){
-                let token = jwt.sign(result[0].toJSON(),'jwtSecret', {
+                let tmp = {_id:result[0]._id.toString()}
+                let token = jwt.sign(tmp,'jwtSecret', {
                     expiresIn : 60*60*24// 授权时效24小时
                 });
                 res.json({
@@ -135,7 +137,13 @@ router.post('/authenticate', (req, res) => {
 })
 
 router.get('/user',(req,res)=>{
-    res.json({ message: req.decoded});
+    User.findUserById(req.decoded._id)
+        .then(user=>{
+            res.send({user:user[0]})
+        })
+        .catch(err=>{
+            console.log("get user err",err)
+        })
 })
 router.post('/upload',(req,res)=>{
    let img=req.body.data;
@@ -145,7 +153,8 @@ router.post('/upload',(req,res)=>{
            .then(()=>{
                User.findUserById(user._id)
                    .then((result)=>{
-                       let token = jwt.sign(result[0].toJSON(),'jwtSecret', {
+                       let tmp = {_id:result[0]._id}
+                       let token = jwt.sign(tmp,'jwtSecret', {
                            expiresIn : 60*60*24// 授权时效24小时
                        });
                        res.json({
@@ -165,5 +174,17 @@ router.post('/upload',(req,res)=>{
        res.send("1111")
    }
 })
+router.post('/modInfo',(req,res)=>{
+    let user = req.body;
+    let id= req.decoded._id;
+    User.updateUserById(id,user)
+        .then(()=> {
+            res.send({message:"Mod information success!"})
+        })
+        .catch(err=>{
+            res.send({message:"Mod information err!"+err})
+        })
+})
+
 
 module.exports = router

@@ -16,7 +16,6 @@ class Channel extends React.Component {
 
     render() {
         const channelId = this.props.match.params.channelId||0;
-        console.log(channelId,"channel页面的channelId")
         return (
             <div className="channel-root">
                 <Header></Header>

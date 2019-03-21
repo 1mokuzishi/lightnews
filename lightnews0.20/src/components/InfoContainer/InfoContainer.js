@@ -34,9 +34,6 @@ class InfoContainer extends React.Component {
                             <span>生日：{user.birth}</span>
                         </div>
                         <div className="info_item">
-                            <span>地区：{user.region}</span>
-                        </div>
-                        <div className="info_item">
                             <span>行业：{user.industry}</span>
                         </div>
                         <div className="info_item">

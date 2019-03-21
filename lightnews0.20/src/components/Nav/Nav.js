@@ -23,11 +23,9 @@ class Nav extends React.Component {
     }
     componentDidMount(){
         window.addEventListener('scroll',this.handleScroll,true);
-        console.log(this.props.channel,"nav组件中的channelId")
         this.handleActive(this.props.channel)
     }
     componentWillReceiveProps(nextProps){
-        console.log(nextProps.channel,"nav组件中的channelId")
         this.handleActive(nextProps.channel)
     }
     //改变选中的nav_item

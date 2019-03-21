@@ -12,7 +12,10 @@ module.exports = {
     },
     findUserById:function findUserById(id) {
         return User.find({_id:id}).exec()
-    }
+    },
+    updateUserById:function updateUserById(id,user) {
+        return User.updateOne({_id:id},{$set:{phone:user.phone,industry:user.industry,nickname:user.nickname,birth:user.birth}}).exec()
+    },
 
 
 }
