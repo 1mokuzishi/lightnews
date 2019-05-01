@@ -7,13 +7,6 @@ import Fixedtool from '../components/Fixedtools/Fixedtools'
 import Footer from '../components/Footer/Footer'
 
 class Channel extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    componentDidMount(){
-
-    }
-
     render() {
         const channelId = this.props.match.params.channelId||0;
         return (

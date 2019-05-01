@@ -3,7 +3,6 @@ import util from '../../lib/util'
 import reqwest from 'reqwest'
 import './index.css'
 import config from '../../config'
-
 class Header extends React.Component {
     constructor(props) {
         super(props);
@@ -26,6 +25,7 @@ class Header extends React.Component {
                         auth:true,
                         user:result.user,
                     })
+                    util.setUser('id',result.user._id)
                 }
             }
         })
@@ -59,6 +59,7 @@ class Header extends React.Component {
     }
     handleExit=()=>{
         util.removeItem('jwt-token');
+        util.removeUser('id');
         window.location.href="/home";
     }
     handle2Home=()=>{
@@ -84,7 +85,7 @@ class Header extends React.Component {
                                           onMouseOver={this.handleUserOver}
                                           onMouseOut={this.handleUserOut}
                                      >
-                                         <img src={user.avatar}/>
+                                         <img src={user.avatar} alt="avatar"/>
                                      </div>
                                      <div className="user_name">{user.nickname}</div>
                                  </div>

@@ -39,13 +39,28 @@ module.exports = {
     },
     getNewsByKey:function getNewsByKey(key) {
         const query = {
-            //$or: [ {title:`{$regex":${key}}`}, { content:`{$regex":${key}}` }]
-            title:eval("/"+key+"/i")
+            '$or':[{title:eval("/"+key+"/i")},{author:eval("/"+key+"/i")},{tags:eval("/"+key+"/i")}]
         }
         return News
             .find(query)
             .sort({ _id: 1 })
             .exec()
     },
-  
+    getNewsByKeyword:function getNewsByKeyword(key) {
+        let arr=[];
+        key.map((item)=>{
+            arr.push({title:eval("/"+item+"/i")});
+            arr.push({author:eval("/"+item+"/i")});
+            arr.push({tags:eval("/"+item+"/i")});
+        })
+        const query = {
+            '$or':arr
+        }
+        return News
+            .find(query)
+            .sort({ _id: 1 })
+    },
+
+
+
 }

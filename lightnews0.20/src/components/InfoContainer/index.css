@@ -50,3 +50,24 @@
     color: #3399ea;
     cursor: pointer;
 }
+.tags_item{
+    height: 150px;
+    line-height: 32px;
+    margin-bottom: 4px;
+    overflow: hidden;
+}
+.tags_item span{
+    font-size: 18px;
+    color: #4d4d4d;
+}
+.tags_content{
+    margin-left: 120px;
+}
+.tags{
+    display: inline-block;
+    margin: 10px;
+    padding: 5px;
+    font-size: 18px;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+}

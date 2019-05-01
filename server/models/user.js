@@ -16,6 +16,13 @@ module.exports = {
     updateUserById:function updateUserById(id,user) {
         return User.updateOne({_id:id},{$set:{phone:user.phone,industry:user.industry,nickname:user.nickname,birth:user.birth}}).exec()
     },
+    addHistory:function addHistory(userId,tags) {
+        return User.updateMany({_id:userId},{$push:{history:{$each:tags}}}).exec()
+    },
+    updateKeyword:function updateKeyword(userId,tags){
+        return User.updateOne({_id:userId},{$set:{keyword:tags}}).exec()
+
+    }
 
 
 }

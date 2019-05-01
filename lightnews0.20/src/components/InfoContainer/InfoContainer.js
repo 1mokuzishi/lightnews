@@ -16,6 +16,11 @@ class InfoContainer extends React.Component {
     }
     render() {
         const {user} = this.state
+        var tagsArr = [];
+
+        if(user.keyword!==undefined){
+            tagsArr=Object.getOwnPropertyNames(user.keyword)
+        }
         return (
             <div className="info_root">
             <div className="info_container main flex-block">
@@ -36,8 +41,17 @@ class InfoContainer extends React.Component {
                         <div className="info_item">
                             <span>行业：{user.industry}</span>
                         </div>
-                        <div className="info_item">
-                            <span>感兴趣标签：{user.keyword}</span>
+                        <div className="tags_item">
+                            <span >感兴趣标签：</span>
+                            <div className="tags_content">
+                            {
+                                tagsArr.slice(0,10).map((item,index)=>{
+                                    return(
+                                        <span key={index} className="tags">{item}</span>
+                                    )
+                                })
+                            }
+                        </div>
                         </div>
                     </div>
                 </div>

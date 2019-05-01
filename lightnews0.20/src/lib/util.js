@@ -9,7 +9,13 @@ const util={
         return channelList[id];
     },
     channelName2Id: function (name) {
-        return channelList.indexOf(name);
+        if(channelList.indexOf(name) > 0){
+            return channelList.indexOf(name);
+        }else{
+            return 0;
+        }
+
+
     },
     encode:function(str){
         return Base64.encode(str);
@@ -36,7 +42,16 @@ const util={
     },
     clear(){
         localStorage.clear();
-    }
+    },
+    setUser(key,value){
+        sessionStorage.setItem(key,value);
+    },
+    getUser(key){
+        return sessionStorage.getItem(key);
+    },
+    removeUser(key){
+        sessionStorage.removeItem(key);
+    },
 
 }
 export default util;

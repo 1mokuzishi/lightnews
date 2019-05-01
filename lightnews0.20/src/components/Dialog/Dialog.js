@@ -98,11 +98,11 @@ class Dialog extends React.Component {
                         <span onClick={this.handleCancel}>x</span>
                     </div>
                     {
-                        (this.state.title =="修改资料")?
+                        (this.state.title.toString()  === "修改资料")?
                             <ModInfo/>:
                             <div className="avatar_mod_container">
                                 <div className="avatar">
-                                    <img src={imageUrl?imageUrl:this.state.user.avatar}/>
+                                    <img src={imageUrl?imageUrl:this.state.user.avatar} alt="avatar"/>
                                 </div>
                                 <Upload
                                     accept="image/*"

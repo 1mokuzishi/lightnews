@@ -2,16 +2,21 @@ import React from 'react';
 import "./index.css"
 import reqwest from 'reqwest';
 import config from '../../config'
+import util from "../../lib/util";
 class Aside extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            hotData: [{path:"",title:"想不到吧！13 个电影中想不到吧！13 个电影中的良心细节的良心细节",author:"央视网",createAt:"六小时前"}],
+            hotData: [],
             topSearchList:[],
         }
     }
     componentDidMount(){
         this.getTopSearchList();
+        let userId = util.getUser('id');
+        if(userId!==null){
+            this.getHotData(userId);
+        }
     }
     getTopSearchList=()=>{
         reqwest({
@@ -21,6 +26,20 @@ class Aside extends React.Component {
             success: (res) => {
                 this.setState({
                     topSearchList: res.data,
+                })
+            },
+
+        });
+    }
+    getHotData=(userId)=>{
+        reqwest({
+            url:`${config.url}/api/hot_data`,
+            method:'get',
+            contentType: 'application/json',
+            headers: {'userId': userId},
+            success: (res) => {
+                this.setState({
+                    hotData: res,
                 })
             },
 
@@ -74,7 +93,7 @@ class Aside extends React.Component {
                     <h3 className="channel_title">为您推荐</h3>
                     <div className="channel_list">
                         <ul className="channel_list_show">
-                            {
+                            {(this.state.hotData.length!==0)?
                                 this.state.hotData.map((item,index)=>{
                                     return (
                                         <li key={index}>
@@ -85,7 +104,7 @@ class Aside extends React.Component {
                                             </div>
                                         </li>
                                     )
-                                })
+                                }): <a href="/login">暂无推荐，请登录。</a>
                             }
                         </ul>
                     </div>
@@ -95,7 +114,7 @@ class Aside extends React.Component {
                             this.state.topSearchList.map((item,index)=>{
                                 return(
                                     <span key={index} style={{float:"left"}}>
-                                        <a href={`/search?keyword=${item.keyword}`} title={item.keyword} target="_blank">{item.keyword}</a>
+                                        <a href={`/search?keyword=${item.keyword}`} title={item.keyword} target="_blank" rel="noopener noreferrer">{item.keyword}</a>
                                     </span>
                                 )
                             })
@@ -103,15 +122,15 @@ class Aside extends React.Component {
                         <div style={{clear:"both"}}></div>
                     </div>
                     <div className="aboutLn">
-                        <div className="channel_title">关于LightNews</div>
-                        <div className="about_warp">
-                            <div className="about_box">
-                                <a href="#" target="_blank">
-                                    <div className="about_bg"></div>
-                                    <div className="about_title">关于LightNews</div>
-                                </a>
-                            </div>
+                    <div className="channel_title">关于LightNews</div>
+                    <div className="about_warp">
+                        <div className="about_box">
+                            <a href="/" target="_blank">
+                                <div className="about_bg"></div>
+                                <div className="about_title">关于LightNews</div>
+                            </a>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

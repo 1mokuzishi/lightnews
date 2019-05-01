@@ -4,6 +4,7 @@ import util from '../../lib/util'
 import Aside from '../Aside/Aside'
 import config from '../../config'
 import './index.css'
+
 class Content extends React.Component {
     constructor(props) {
         super(props);
@@ -13,7 +14,6 @@ class Content extends React.Component {
         };
     }
     componentDidMount() {
-        console.log(this.props.channel,"content组件的channelId");
         let channel = util.channelId2Name(this.props.channel);
         let url=`${config.url}/api/channel/${channel}?count=20`;
         this.getData(url);
@@ -38,7 +38,7 @@ class Content extends React.Component {
                     list: tmp,
                     pages:pages
                 },()=>{
-                    if(this.state.list.lenth>1)
+                    if(this.state.list.length>1)
                     var nextid=this.state.list[this.state.list.length-1]._id;
                     document.getElementById("next_id").setAttribute('next_id',nextid)
                 })
@@ -67,7 +67,7 @@ class Content extends React.Component {
                                         </div>
                                     </div>
                                     {item.img?
-                                        <a href="#" alt="" className="img" style={{'backgroundImage':'url(http:'+item.img+')'}}> </a>:""
+                                        <a href={item.img} alt={item.title} className="img" style={{'backgroundImage':'url(http:'+item.img+')'}} target="_blank" rel="noopener noreferrer"> </a>:""
                                     }
 
                                 </div>

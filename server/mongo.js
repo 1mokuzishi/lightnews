@@ -25,6 +25,6 @@ exports.User = mongoose.model('User', {
     birth:{type:'string',default:"1970-01-01"},
     avatar:{type: 'string',default:'https://profile.csdnimg.cn/2/B/3/1_qq_29002631'},
     industry:{type: 'string',default:""},
-    keyword:[],
+    keyword:{},
     history:[],
 })

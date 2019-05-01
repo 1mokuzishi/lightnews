@@ -22,32 +22,30 @@ class SearchContent extends React.Component {
                 <div className="main flex-block">
                     <div className="article_container flex-9">
                         {
-                            list.map((item,index)=>{
-                                return(
-                                <div className="figure flex-block " key={index}>
-                                    <div className="article flex-1">
-                                        <h2 className="figcaption">
-                                            <a href={`/article/${item._id}`} title={item.title}>{item.title}</a>
-                                        </h2>
-                                        <div className="subtitle">
-                                            <span>{item.author}</span>
-                                            <span>{item.time}</span>
+                            (list.length!==0)?list.map((item, index) => {
+                                return (
+                                    <div className="figure flex-block " key={index}>
+                                        <div className="article flex-1">
+                                            <h2 className="figcaption">
+                                                <a href={`/article/${item._id}`} title={item.title}>{item.title}</a>
+                                            </h2>
+                                            <div className="subtitle">
+                                                <span>{item.author}</span>
+                                                <span>{item.time}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    {item.img?
-                                        <a href="#" alt="" className="img" style={{'backgroundImage':'url(http:'+item.img+')'}}> </a>:""
-                                    }
+                                        {item.img ?
+                                            <a href="#" alt="" className="img"
+                                               style={{'backgroundImage': 'url(http:' + item.img + ')'}}> </a> : ""
+                                        }
 
-                                </div>
+                                    </div>
                                 )
-                            })
+                            }):<p>抱歉没有找到相关搜索结果。</p>
                         }
                     </div>
                     <Aside></Aside>
                 </div>
-                {/*{this.state.pages<6?<div className="load_tip" id="next_id" onClick={this.handleMore}>点击加载更多数据。</div>
-                :<div className="load_tip">数据加载完毕。</div>}*/}
-
             </div>
         )
     }

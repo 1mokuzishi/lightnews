@@ -26,21 +26,74 @@ router.use(function(req,res,next) {
         next();
     }
 })
+
+
 router.get('/news', (req, res) => {
    res.send('hello')
     res.end();
 })
 
 router.get('/news/:id', (req, res) => {
-    News.getNewsById(req.params.id)
+    let userId = req.headers.userid;
+    let newsId = req.params.id
+    News.getNewsById(newsId)
     .then(news => {
-      res.send({data:news})
-    })
-    .catch(err => {
+        res.send({data:news})
+        let tags=news[0].tags?news[0].tags.split('_'):null
+        if(tags!==null){
+            User.addHistory(userId,tags)
+                .then(()=>{
+                    User.findUserById(userId).then(user=>{
+                        let countedTags = user[0].history.reduce(function (allItems, item) {
+                            if (item in allItems) {
+                                allItems[item]++;
+                            }
+                            else {
+                                allItems[item] = 1;
+                            }
+                            return allItems;
+                        }, {});
+                        User.updateKeyword(userId,countedTags).catch(err=>{console.log(err)})
+                    }).catch(err=>{
+                        console.log(err)
+                    })
+                }).catch(err => {
+                    console.log(err)
+                })
+
+        }
+
+    }).catch(err => {
       res.send(err)
     })
 })
+router.get('/hot_data', (req, res) => {
+    let userId = req.headers.userid;
+    User.findUserById(userId).then(user=>{
+        var arr = []
+        for (let i in user[0].keyword) {
+            let o = {};
+            o[i] = user[0].keyword[i];
+            arr.push(o)
+        }//排序，使关键词出现最多次的排前面
+        arr.sort(function (a,b) {
+            return Object.values(b)[0]-Object.values(a)[0];
+        })
+        let temp=arr.slice(0,10);
+        let tagsArr = [];
+        temp.map((item)=> {
+            tagsArr.push(Object.keys(item)[0]);
+        })
+        News.getNewsByKeyword(tagsArr).then((news)=>{
+            res.send(news.slice(0,20));
+        }).catch(err=>console.log(err))
 
+
+
+
+    })
+
+})
 router.get('/channel/:channel', (req, res) => {
     var count = req.query.count;
     var next_id = req.query['next_id'];

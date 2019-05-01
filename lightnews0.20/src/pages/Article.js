@@ -20,30 +20,34 @@ class Article extends React.Component {
     componentDidMount(){
         var articleId = this.props.match.params.articleId;
         this.getData(articleId);
+
     }
+
     getData = (articleId)=>{
+        let userId = util.getUser('id');
         reqwest({
             url:`${config.url}/api/news/${articleId}`,
             method:'get',
             contentType: 'application/json',
+            headers: {'userId': userId},
             success: (res) => {
                     this.setState({
-                        data: res.data,
+                        data: res.data[0],
                     })
+                document.title= res.data[0].title;
             },
         });
     }
     render() {
         var article =this.state.data;
         var channelId = util.channelName2Id(article.channel);
-
         return (
             <div className="article-root">
-                    <Header></Header>
-                    <Nav channel={channelId}></Nav>
-                    <ArticleShow article={article} ></ArticleShow>
-                    <Fixedtool></Fixedtool>
-                    <Footer></Footer>
+                    <Header/>
+                    <Nav channel={channelId}/>
+                    <ArticleShow article={article} />
+                    <Fixedtool/>
+                    <Footer/>
             </div>
         )
     }

@@ -27,14 +27,14 @@ class ArticleShow extends React.Component {
                                 <a href="/" target="_blank" title="首页">首页</a>
                             </li>
                             <li>
-                                <a href={`/channel/${util.channelName2Id(article.channel)}`} target="_blank" title={article.channel}>{article.channel}</a>
+                                <a href={`/channel/${util.channelName2Id(article.channel)}`} target="_blank" rel="noopener noreferrer" title={article.channel}>{article.channel}</a>
                             </li>
                             <li>正文</li>
                         </ol>
                         <div className="article_header">
                             <h1>{article.title}</h1>
                             <div className="article_tips">
-                                <a href="" target="_blank">
+                                <a href={`/search?keyword=${article.author}`} target="_blank" rel="noopener noreferrer">
                                     <span className="article-logo-container"></span>
                                     <span className="author">{article.author}</span>
                                     <span className="time">{article.time}</span>
@@ -46,12 +46,12 @@ class ArticleShow extends React.Component {
                         </div>
                         <div className="article_more">
                             相关标签：
-                            {
+                            {(article.tags.length>1)?
                                 _.map(article.tags,(item,index)=>{
                                     return(
-                                        <a key={index} href={`/search?${item}`} title={item}>{item}</a>
+                                        <a key={index} href={`/search?keyword=${item}`} title={item}>{item}</a>
                                     )
-                                })
+                                }):<p>无</p>
                             }
                         </div>
                     </div>
